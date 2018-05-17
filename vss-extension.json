@@ -1,0 +1,72 @@
+{
+  "manifestVersion": 1,
+  "id": "VersionReaderTask",
+  "name": "Version Reader",
+  "version": "1.0",
+  "publisher": "conficient",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "A build task that reads the &ltVersion&gt; tag from the .csproj or .vbproj file and makes them available as build variables.",
+  "categories": [
+    "Build and release"
+  ],
+  "tags": [
+    "AssemblyInfo",
+    "Version",
+    "Build Variables"
+  ],
+  "icons": {
+    "default": "images/extension-icon.png"
+  },
+  "files": [
+    {
+      "path": "VersionReaderTask"
+    }
+  ],
+  "content": {
+    "details": {
+      "path": "readme.md"
+    },
+    "license": {
+      "path": "license"
+    }
+  },
+  "links": {
+    "getstarted": {
+      "uri": "https://github.com/conficient/versionReaderTask"
+    },
+    "support": {
+      "uri": "https://github.com/conficient/versionReaderTask/issues"
+    }
+  },
+  "screenshots": [
+    {
+      "path": "images/screenshot1.png"
+    },
+    {
+      "path":  "images/screenshot2.png"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/conficient/versionReaderTask"
+  },
+  "galleryFlags": [
+    "Public"
+  ],
+  "contributions": [
+    {
+      "id": "assembly-info-reader-build-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "AssemblyInfoReaderTask"
+      }
+    }
+  ]
+}
