@@ -42,14 +42,6 @@
       "uri": "https://github.com/conficient/versionReaderTask/issues"
     }
   },
-  "screenshots": [
-    {
-      "path": "images/screenshot1.png"
-    },
-    {
-      "path":  "images/screenshot2.png"
-    }
-  ],
   "repository": {
     "type": "git",
     "uri": "https://github.com/conficient/versionReaderTask"
