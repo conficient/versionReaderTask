@@ -9,7 +9,7 @@
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "description": "A build task that reads the &ltVersion&gt; tag from the .csproj or .vbproj file and makes them available as build variables.",
+  "description": "A build task that reads the <Version> tag from the .csproj or .vbproj file and makes them available as build variables.",
   "categories": [
     "Build and release"
   ],
