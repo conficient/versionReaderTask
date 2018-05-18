@@ -1,14 +1,14 @@
 {
   "id": "EBF8CB1C-EB3B-4F4D-86FD-D55549BC6D81",
   "name": "VersionReaderTask",
-  "friendlyName": "Assembly Info Reader",
-  "description": "Reads the &lt;Version&gt; tag value project file and makes it available as build variables.",
+  "friendlyName": "Version Reader",
+  "description": "Reads the <Version> tag value project file and makes it available as build variables.",
   "helpMarkDown": "",
   "category": "Utility",
   "author": "Conficient",
   "version": {
     "Major": 1,
-    "Minor": 0,
+    "Minor": 2,
     "Patch": 0
   },
   "instanceNameFormat": "Generate variables $(searchPattern) ",
