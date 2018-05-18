@@ -14,7 +14,7 @@
     "Build and release"
   ],
   "tags": [
-    "AssemblyInfo",
+    "Project",
     "Version",
     "Build Variables"
   ],
@@ -51,13 +51,13 @@
   ],
   "contributions": [
     {
-      "id": "assembly-info-reader-build-task",
+      "id": "version-reader-build-task",
       "type": "ms.vss-distributed-task.task",
       "targets": [
         "ms.vss-distributed-task.tasks"
       ],
       "properties": {
-        "name": "AssemblyInfoReaderTask"
+        "name": "VersionReaderTask"
       }
     }
   ]
