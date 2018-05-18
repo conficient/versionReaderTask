@@ -4,7 +4,7 @@
 )
 
 # Write all params to the console.
-Write-Host "VersionReader v1.2"
+Write-Host "VersionReader v1.3"
 Write-Host "=================="
 Write-Host ("Search Pattern: " + $searchPattern)
 Write-Host ("Variables Prefix: " + $variablesPrefix)
@@ -12,7 +12,8 @@ Write-Host ("Variables Prefix: " + $variablesPrefix)
 function SetBuildVariable([string]$varName, [string]$varValue)
 {
 	Write-Host ("Setting variable " + $variablesPrefix + $varName + " to '" + $varValue + "'")
-	Write-Output ("##vso[task.setvariable variable=" + $variablesPrefix + $varName + ";]" +  $varValue )
+    Write-Output ("##vso[task.setvariable variable=" + $variablesPrefix + $varName + ";]" +  $varValue )
+    Write-Output ("##vso[task.setvariable variable=" + $variablesPrefix + $varName + "_Build;]" +  $varValue + "." + $build.buildNumber )
 }
 
 function SetVersionVariables([xml]$xml)
