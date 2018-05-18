@@ -2,14 +2,14 @@
   "manifestVersion": 1,
   "id": "VersionReaderTask",
   "name": "Version Reader",
-  "version": "1.0",
+  "version": "1.1",
   "publisher": "conficient",
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "description": "A build task that reads the <Version> tag from the .csproj or .vbproj file and makes them available as build variables.",
+  "description": "A build task that reads the <Version> tag from the .csproj or .vbproj file and makes it available as build variables.",
   "categories": [
     "Build and release"
   ],

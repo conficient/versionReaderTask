@@ -16,7 +16,7 @@ function SetBuildVariable([string]$varName, [string]$varValue)
 function SetVersionVariables([xml]$xml)
 {
     $version = $xml.Project.PropertyGroup.Version
-	SetBuildVariable "Version", "$version"
+	SetBuildVariable "Version" $version
 }
 
 $filesFound = Get-ChildItem -Path $searchPattern -Recurse
@@ -34,7 +34,6 @@ if ($filesFound.Count -gt 1)
 foreach ($fileFound in $filesFound)
 {
     Write-Host ("Reading file: " + $fileFound)
-    #$fileText = [IO.File]::ReadAllText($fileFound)
     [xml]$XmlDocument = Get-Content -Path $fileFound
     SetVersionVariables($XmlDocument)
 }
