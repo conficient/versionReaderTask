@@ -28,6 +28,14 @@
         "defaultValue": "",
         "helpMarkDown": "Each variable generated will be prefixed with this value.",
         "required":  false
+    },
+    {
+        "name": "buildPrefix",
+        "type": "string",
+        "label": "Build Prefix",
+        "defaultValue": "",
+        "helpMarkDown": "The build number will be prefixed with this value.",
+        "required":  false
     }
   ],
   "execution": {
