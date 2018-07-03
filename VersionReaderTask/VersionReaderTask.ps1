@@ -5,7 +5,7 @@
 )
 
 # Write all params to the console.
-Write-Host "VersionReader v1.5"
+Write-Host "VersionReader v1.6"
 Write-Host "=================="
 Write-Host ("Search Pattern: " + $searchPattern)
 Write-Host ("Variables Prefix: " + $variablesPrefix)
