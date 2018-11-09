@@ -10,6 +10,6 @@ Optionally prefix the variable values so multiple projects can be read.
 
 Adapted from [AssemblyInfoReaderTask](https://github.com/kyleherzog/AssemblyInfoReaderTask) with thanks to [kyleherzog](https://github.com/kyleherzog)
 
-### Version 1.7
+### Version 1.8
 
 Added fix for blank Version. Sometimes in simple projects the `Version` tag is absent because the value is the same as the `AssemblyVersion`. Added a check for a blank version being returned and attempts to use the `AssemblyVersion` value instead.
