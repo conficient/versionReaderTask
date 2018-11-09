@@ -5,7 +5,7 @@
 )
 
 # Write all params to the console.
-Write-Host "VersionReader v1.6"
+Write-Host "VersionReader v1.7"
 Write-Host "=================="
 Write-Host ("Search Pattern: " + $searchPattern)
 Write-Host ("Variables Prefix: " + $variablesPrefix)
@@ -22,6 +22,16 @@ function SetBuildVariable([string]$varName, [string]$varValue)
 function SetVersionVariables([xml]$xml)
 {
     $version = $xml.Project.PropertyGroup.Version
+    if ($version -eq "")
+    {
+        Write-Host ("No Version property value found, checking AssemblyVersion instead")
+        $version = $xml.Project.PropertyGroup.AssemblyVersion
+        if ($version -eq "")
+        {
+            # FAIL
+            Throw "No usable version found"
+        }
+    }
 	SetBuildVariable "Version" $version
 }
 

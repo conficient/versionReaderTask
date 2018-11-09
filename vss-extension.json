@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "VersionReaderTask",
   "name": "Version Reader",
-  "version": "1.6",
+  "version": "1.7",
   "publisher": "conficient",
   "targets": [
     {
