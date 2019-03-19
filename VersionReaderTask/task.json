@@ -8,7 +8,7 @@
   "author": "Conficient",
   "version": {
     "Major": 1,
-    "Minor": 10,
+    "Minor": 11,
     "Patch": 0
   },
   "instanceNameFormat": "Generate variables $(searchPattern) ",
