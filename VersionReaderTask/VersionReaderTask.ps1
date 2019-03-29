@@ -1,11 +1,11 @@
 ﻿Param (
     [string]$searchPattern = "**\*.??proj",
-    [string]$variablesPrefix,
+    [string]$variablesPrefix = "",
     [string]$buildPrefix = "."
 )
 
 # Write all params to the console.
-Write-Host "VersionReader v1.11"
+Write-Host "VersionReader v1.12"
 Write-Host "==================="
 Write-Host ("Search Pattern: " + $searchPattern)
 Write-Host ("Variables Prefix: " + $variablesPrefix)
@@ -14,9 +14,11 @@ Write-Host ("Build Prefix: " + $buildPrefix)
 function SetBuildVariable([string]$varName, [string]$varValue)
 {
     $varName = $variablesPrefix + $varName
-	Write-Host ("Setting variable " + $varName + " to '" + $varValue + "' and build is " + $Env:BUILD_BUILDID)
+    $versionBuild = $varValue + $buildPrefix + $Env:BUILD_BUILDID
+	Write-Host ("Setting variable " + $varName + " = '" + $varValue + "'")
+	Write-Host ("Setting variable " + $varName + "_build = '" + $versionBuild + "'")
     Write-Output ("##vso[task.setvariable variable=" + $varName + ";]" +  $varValue )
-    Write-Output ("##vso[task.setvariable variable=" + $varName + "_Build;]" +  $varValue + $buildPrefix + $Env:BUILD_BUILDID )
+    Write-Output ("##vso[task.setvariable variable=" + $varName + "_Build;]" +  $versionBuild )
 }
 
 function SetVersionVariables([xml]$xml)
@@ -32,15 +34,7 @@ function SetVersionVariables([xml]$xml)
             Throw "No usable version found"
         }
     }
-    
-    # ensure the $varValue ends in . before the suffix
-    $lastChar = $version.substring($version.length - 1, 1)
-    if ($lastChar -ne ".") 
-    {
-        # append .
-        Write-Host("Appending . to the version number")
-        $version = $version + "."
-    }
+
     # set env var
 	SetBuildVariable "Version" $version
 }
