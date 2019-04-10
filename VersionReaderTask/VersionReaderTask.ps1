@@ -5,7 +5,7 @@
 )
 
 # Write all params to the console.
-Write-Host "VersionReader v1.13"
+Write-Host "VersionReader v1.14"
 Write-Host "==================="
 Write-Host ("Search Pattern: " + $searchPattern)
 Write-Host ("Variables Prefix: " + $variablesPrefix)
@@ -36,7 +36,25 @@ function SetVersionVariables([xml]$xml)
     }
 
     # set env var
-	SetBuildVariable "Version" $version
+    SetBuildVariable "Version" $version
+
+    # check for VersionPrefix
+    [string]$versionPrefix = ([string]$xml.Project.PropertyGroup.VersionPrefix).Trim()
+    if ($versionPrefix -eq "") {
+        Write-Host ("No VersionPrefix value found");
+    }
+    else {
+        SetBuildVariable "VersionPrefix" $versionPrefix
+    }
+
+    # check for VersionSuffix
+    [string]$versionSuffix = ([string]$xml.Project.PropertyGroup.VersionSuffix).Trim()
+    if ($versionSuffix -eq "") {
+        Write-Host ("No VersionSuffix value found");
+    }
+    else {
+        SetBuildVariable "VersionPrefix" $versionSuffix
+    }
 }
 
 $filesFound = Get-ChildItem -Path $searchPattern -Recurse
