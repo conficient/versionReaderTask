@@ -5,7 +5,7 @@
 )
 
 # Write all params to the console.
-Write-Host "VersionReader v1.14"
+Write-Host "VersionReader v1.15"
 Write-Host "==================="
 Write-Host ("Search Pattern: " + $searchPattern)
 Write-Host ("Variables Prefix: " + $variablesPrefix)
@@ -43,16 +43,17 @@ function SetVersionVariables([xml]$xml) {
         Write-Host ("No VersionSuffix property value found");
     }
     else {
-        SetBuildVariable "VersionPrefix" $versionSuffix
+        SetBuildVariable "VersionSuffix" $versionSuffix
     }
 
     # check for VersionPrefix
     [string]$versionPrefix = ([string]$xml.Project.PropertyGroup.VersionPrefix).Trim()
     if ($versionPrefix -eq "") {
-        Write-Host ("No VersionPrefix property value found");
-
-        # Missing all version sources is considered a failure of the task
-        throw "No Version sources found in project files"
+        # When a new 2017-format project is created there are no version tags set
+        # but when you view Project properties it defaults to 1.0.0. We will assume this is 
+        # the case here and select 1.0.0
+        Write-Host ("No VersionPrefix property value found, using VersionPrefix 1.0.0 as the default");
+        SetBuildVariable "VersionPrefix" "1.0.0"
     }
     else {
         SetBuildVariable "VersionPrefix" $versionPrefix

@@ -8,7 +8,7 @@
   "author": "Conficient",
   "version": {
     "Major": 1,
-    "Minor": 14,
+    "Minor": 15,
     "Patch": 0
   },
   "instanceNameFormat": "Generate variables $(searchPattern) ",
@@ -33,7 +33,7 @@
         "name": "buildPrefix",
         "type": "string",
         "label": "Build Prefix",
-        "defaultValue": "",
+        "defaultValue": ".",
         "helpMarkDown": "The build number will be prefixed with this value.",
         "required":  false
     }
