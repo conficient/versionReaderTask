@@ -11,66 +11,65 @@ Write-Host ("Search Pattern: " + $searchPattern)
 Write-Host ("Variables Prefix: " + $variablesPrefix)
 Write-Host ("Build Prefix: " + $buildPrefix)
 
-function SetBuildVariable([string]$varName, [string]$varValue)
-{
+function SetBuildVariable([string]$varName, [string]$varValue) {
     $varName = $variablesPrefix + $varName
     $versionBuild = $varValue + $buildPrefix + $Env:BUILD_BUILDID
-	Write-Host ("Setting variable " + $varName + " = '" + $varValue + "'")
-	Write-Host ("Setting variable " + $varName + "_build = '" + $versionBuild + "'")
-    Write-Output ("##vso[task.setvariable variable=" + $varName + ";]" +  $varValue )
-    Write-Output ("##vso[task.setvariable variable=" + $varName + "_Build;]" +  $versionBuild )
+    Write-Host ("Setting variable " + $varName + " = '" + $varValue + "'")
+    Write-Host ("Setting variable " + $varName + "_build = '" + $versionBuild + "'")
+    Write-Output ("##vso[task.setvariable variable=" + $varName + ";]" + $varValue )
+    Write-Output ("##vso[task.setvariable variable=" + $varName + "_Build;]" + $versionBuild )
 }
 
-function SetVersionVariables([xml]$xml)
-{
+function SetVersionVariables([xml]$xml) {
     [string]$version = ([string]$xml.Project.PropertyGroup.Version).Trim()
-    if ($version -eq "")
-    {
-        Write-Host ("No Version property value found, checking AssemblyVersion instead")
-        $version = ([string]$xml.Project.PropertyGroup.AssemblyVersion).Trim()
-        if ($version -eq "")
-        {
-            # FAIL
-            Throw "No usable version found"
-        }
+    if ($version -ne "") {
+        Write-Host ("Version property value found with version " + $version)
+        SetBuildVariable "Version" $version
+        return
     }
 
-    # set env var
-    SetBuildVariable "Version" $version
+    [string]$assemblyVersion = ([string]$xml.Project.PropertyGroup.AssemblyVersion).Trim()
+    if ($assemblyVersion -ne "") {
+        Write-Host ("AssemblyVersion property value found with version " + $assemblyVersion)
+        SetBuildVariable "Version" $assemblyVersion
+        return
+    }
 
-    # check for VersionPrefix
-    [string]$versionPrefix = ([string]$xml.Project.PropertyGroup.VersionPrefix).Trim()
-    if ($versionPrefix -eq "") {
-        Write-Host ("No VersionPrefix value found");
-    }
-    else {
-        SetBuildVariable "VersionPrefix" $versionPrefix
-    }
+    Write-Host ("No Version or AssemblyVersion property value found");
 
     # check for VersionSuffix
     [string]$versionSuffix = ([string]$xml.Project.PropertyGroup.VersionSuffix).Trim()
     if ($versionSuffix -eq "") {
-        Write-Host ("No VersionSuffix value found");
+        Write-Host ("No VersionSuffix property value found");
     }
     else {
         SetBuildVariable "VersionPrefix" $versionSuffix
     }
+
+    # check for VersionPrefix
+    [string]$versionPrefix = ([string]$xml.Project.PropertyGroup.VersionPrefix).Trim()
+    if ($versionPrefix -eq "") {
+        Write-Host ("No VersionPrefix property value found");
+
+        # Missing all version sources is considered a failure of the task
+        throw "No Version sources found in project files"
+    }
+    else {
+        SetBuildVariable "VersionPrefix" $versionPrefix
+    }    
 }
 
 $filesFound = Get-ChildItem -Path $searchPattern -Recurse
 
-if ($filesFound.Count -eq 0)
-{
+if ($filesFound.Count -eq 0) {
     Write-Warning ("No files matching pattern found.")
 }
 
-if ($filesFound.Count -gt 1)
-{
-   Write-Warning ("Multiple assemblyinfo files found.")
+if ($filesFound.Count -gt 1) {
+    Write-Warning ("Multiple assemblyinfo files found.")
 }
 
-foreach ($fileFound in $filesFound)
-{
+foreach ($fileFound in $filesFound) {
     Write-Host ("Reading file: " + $fileFound)
     [xml]$XmlDocument = Get-Content -Path $fileFound
     SetVersionVariables($XmlDocument)
