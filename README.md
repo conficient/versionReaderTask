@@ -1,5 +1,5 @@
 # VersionReaderTask
-VSTS build task to read Version tag from project files
+Azure DevOps / VSTS build task to read Version tag from project files
 
 Reads the `<Version>` tag from new `csproj` and `vbproj` 2017 format files into environment variables.
 
