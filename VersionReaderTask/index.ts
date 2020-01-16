@@ -1,53 +1,57 @@
 /*
  *  VersionReader V2 devops build task
  *  ----------------------------------
- */
+**/
+import path = require('path');
 import tl = require('azure-pipelines-task-lib/task');
+import * as utils from './Utils';
 
-async function run() {
-    try {
-        // read input variables
-        const searchPattern: string | undefined = tl.getInput('searchPattern', true);
-        if (typeof searchPattern === "undefined") {
-            tl.setResult(tl.TaskResult.Failed, "No searchPattern provided");
-            return;
-        }
-        const variablesPrefix: string | undefined = tl.getInput('variablesPrefix', true);
-        const buildPrefix: string | undefined = tl.getInput('buildPrefix', true);
+export class versionReader {
 
-        // report input variables
-        console.log("VersionReader task V2.0");
-        console.log("=======================");
-        console.log("Search Pattern: " + searchPattern)
-        console.log("Variables Prefix: " + variablesPrefix)
-        console.log("Build Prefix: " + buildPrefix)
+    // internal vars
+    private searchPattern: string | undefined;
+    private variablesPrefix: string | undefined;
+    private buildPrefix: string | undefined;
 
-        var files = LoadFiles(searchPattern);
-        if (files.length == 0) {
-            tl.setResult(tl.TaskResult.Failed, "No matching files found");
-            return;
-        }
+    constructor() {
 
-        files.forEach(file => {
-            console.log("Reading Project file: " + file);
-            // read version from 
-        });
+        this.searchPattern = tl.getPathInput("searchPattern", true);
+        this.variablesPrefix = tl.getInput("variablesPrefix", false);
+        this.buildPrefix = tl.getInput("buildPrefix", false);
     }
-    catch (err) {
-        // Handle exceptions
-        console.log("TASK FAILED: " + err.message);
-        tl.setResult(tl.TaskResult.Failed, err.message);
+
+    public async execute() {
+        try {
+            // report input variables
+            console.log("VersionReader task V2.0");
+            console.log("=======================");
+            console.log("Search Pattern: " + this.searchPattern)
+            console.log("Variables Prefix: " + this.variablesPrefix)
+            console.log("Build Prefix: " + this.buildPrefix)
+
+            var projects = utils.getProjectFiles(this.searchPattern);
+
+            console.log("Found " + projects.length + " project files");
+
+            if (projects.length == 0) {
+                tl.setResult(tl.TaskResult.Failed, "No projects");
+                return;
+            }
+
+            projects.forEach(p => {
+                console.log("Reading Project file: " + p);
+                // read project file and extract version
+            });
+
+            tl.setResult(tl.TaskResult.SucceededWithIssues, "Not finished");
+        }
+        catch (err) {
+
+        }
     }
 
 }
 
 // execute
-run();
-
-function LoadFiles(searchPattern: string): string[] {
-    return [];
-}
-
-function ReadVersion(filename:string) : string {
-    throw "not implemented";
-}
+var vr = new versionReader();
+vr.execute();
