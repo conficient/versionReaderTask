@@ -5,3 +5,4 @@
 /packages
 .vs/
 *.vsix
+**/node_modules/
