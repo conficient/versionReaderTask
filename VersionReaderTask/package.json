@@ -12,7 +12,9 @@
     "azure-pipelines-task-lib": "^2.9.3"
   },
   "devDependencies": {
+    "@types/mocha": "^5.2.7",
     "@types/node": "^13.1.7",
-    "@types/q": "^1.5.2"
+    "@types/q": "^1.5.2",
+    "sync-request": "^6.1.0"
   }
 }

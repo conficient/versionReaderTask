@@ -13,23 +13,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *  ----------------------------------
  */
 const tl = require("azure-pipelines-task-lib/task");
-// input vars
-var searchPattern = "**\*.??proj";
-var variablesPrefix = "";
-var buildPrefix = ".";
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // read input variables
             const searchPattern = tl.getInput('searchPattern', true);
-            if (typeof searchPattern === "undefined")
+            if (typeof searchPattern === "undefined") {
                 tl.setResult(tl.TaskResult.Failed, "No searchPattern provided");
+                return;
+            }
+            const variablesPrefix = tl.getInput('variablesPrefix', true);
+            const buildPrefix = tl.getInput('buildPrefix', true);
             // report input variables
             console.log("VersionReader task V2.0");
             console.log("=======================");
             console.log("Search Pattern: " + searchPattern);
             console.log("Variables Prefix: " + variablesPrefix);
             console.log("Build Prefix: " + buildPrefix);
+            var files = LoadFiles(searchPattern);
+            if (files.length == 0) {
+                tl.setResult(tl.TaskResult.Failed, "No matching files found");
+                return;
+            }
+            files.forEach(file => {
+                console.log("Reading Project file: " + file);
+                // read version from 
+            });
         }
         catch (err) {
             // Handle exceptions
@@ -40,3 +49,9 @@ function run() {
 }
 // execute
 run();
+function LoadFiles(searchPattern) {
+    return [];
+}
+function ReadVersion(filename) {
+    throw "not implemented";
+}
