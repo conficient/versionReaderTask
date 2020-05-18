@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <VersionSuffix>1.2.3</VersionSuffix>
+    <Description>File with emtpy version tag</Description>
+    <Version></Version>
   </PropertyGroup>
 </Project>

@@ -6,4 +6,6 @@ let taskPath = path.join(__dirname, '..', 'index.js');
 let tmr = new tmrm.TaskMockRunner(taskPath);
 // set searchPattern 
 tmr.setInput("searchPattern", "Version.csproj");
+tmr.setInput("variablesPrefix", "TEST");
+tmr.setInput("buildPrefix", ".");
 tmr.run();

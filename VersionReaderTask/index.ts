@@ -6,6 +6,12 @@ import path = require('path');
 import tl = require('azure-pipelines-task-lib/task');
 import * as utils from './Utils';
 
+/**
+ * versionReader class to read version tags from 2017+ .??proj files
+ *
+ * @export
+ * @class versionReader
+ */
 export class versionReader {
 
     // internal vars
@@ -25,28 +31,45 @@ export class versionReader {
             // report input variables
             console.log("VersionReader task V2.0");
             console.log("=======================");
-            console.log("Search Pattern: " + this.searchPattern)
-            console.log("Variables Prefix: " + this.variablesPrefix)
-            console.log("Build Prefix: " + this.buildPrefix)
+            console.log(`Search Pattern  : ${this.searchPattern}`)
+            console.log(`Variables Prefix: ${this.variablesPrefix}`)
+            console.log(`Build Prefix    : ${this.buildPrefix}`)
 
             var projects = utils.getProjectFiles(this.searchPattern);
-
-            console.log("Found " + projects.length + " project files");
+            console.log(`Found ${projects.length} project files`);
 
             if (projects.length == 0) {
                 tl.setResult(tl.TaskResult.Failed, "No projects");
                 return;
             }
 
-            projects.forEach(p => {
-                console.log("Reading Project file: " + p);
-                // read project file and extract version
-            });
+            if (projects.length == 0) {
+                tl.setResult(tl.TaskResult.Failed, "No projects found/matched");
+                return;
+            }
+            // get first project
+            var proj = projects[0];
 
-            tl.setResult(tl.TaskResult.SucceededWithIssues, "Not finished");
+            if (projects.length > 1) {
+                tl.warning(`Matched more than one project, first will be used: ${proj}`);
+            }
+            console.log("Reading Project file: " + proj);
+            // read project file and extract version
+            var versions = utils.readProjectFile(proj);
+
+            // Get version to use for VERSION_BUILD and set it
+            var versionValue = utils.getFirstMatch(versions)
+            utils.setBuildVariable(versionValue, this.variablesPrefix, this.buildPrefix);
+
+            // Set other variables (Version, AssemblyVersion, VersionPrefix, VersionSuffix)
+            utils.setEnvVars(versions, this.variablesPrefix);
+
+            // report success
+            tl.setResult(tl.TaskResult.Succeeded, "Variables set");
         }
         catch (err) {
-
+            tl.error(err);
+            tl.setResult(tl.TaskResult.Failed, err);
         }
     }
 

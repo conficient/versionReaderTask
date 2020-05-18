@@ -1,7 +1,7 @@
 {
   "name": "versionreadertask",
-  "version": "1.0.0",
-  "description": "VersionReader for VSTS Azure DevOps",
+  "version": "2.0.0",
+  "description": "VersionReader V2 for VSTS Azure DevOps",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,12 +9,15 @@
   "author": "conficient",
   "license": "ISC",
   "dependencies": {
-    "azure-pipelines-task-lib": "^2.9.3"
+    "azure-pipelines-task-lib": "^2.9.3",
+    "xmldom": "^0.3.0",
+    "xpath": "0.0.27"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
     "@types/node": "^13.1.7",
     "@types/q": "^1.5.2",
+    "@types/xmldom": "^0.1.29",
     "sync-request": "^6.1.0"
   }
 }
