@@ -23,22 +23,7 @@
   },
   "files": [
     {
-      "path": "VersionReaderTask/index.js"
-    },
-    {
-      "path": "VersionReaderTask/index.ts"
-    },
-    {
-      "path": "VersionReaderTask/utils.js"
-    },
-    {
-      "path": "VersionReaderTask/utils.ts"
-    },
-    {
-      "path": "VersionReaderTask/task.json"
-    },
-    {
-      "path": "VersionReaderTask/icon.png"
+      "path": "VersionReaderTask"
     }
   ], 
   "content": {
