@@ -16,7 +16,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const tl = require("azure-pipelines-task-lib/task");
-const utils = __importStar(require("./Utils"));
+const utils = __importStar(require("./utils"));
 /**
  * versionReader class to read version tags from 2017+ .??proj files
  *
@@ -41,12 +41,7 @@ class versionReader {
                 var projects = utils.getProjectFiles(this.searchPattern);
                 console.log(`Found ${projects.length} project files`);
                 if (projects.length == 0) {
-                    tl.setResult(tl.TaskResult.Failed, "No projects");
-                    return;
-                }
-                if (projects.length == 0) {
-                    tl.setResult(tl.TaskResult.Failed, "No projects found/matched");
-                    return;
+                    throw "No project matched";
                 }
                 // get first project
                 var proj = projects[0];

@@ -4,7 +4,7 @@
 **/
 import path = require('path');
 import tl = require('azure-pipelines-task-lib/task');
-import * as utils from './Utils';
+import * as utils from './utils';
 
 /**
  * versionReader class to read version tags from 2017+ .??proj files
@@ -39,14 +39,9 @@ export class versionReader {
             console.log(`Found ${projects.length} project files`);
 
             if (projects.length == 0) {
-                tl.setResult(tl.TaskResult.Failed, "No projects");
-                return;
+                throw "No project matched";
             }
 
-            if (projects.length == 0) {
-                tl.setResult(tl.TaskResult.Failed, "No projects found/matched");
-                return;
-            }
             // get first project
             var proj = projects[0];
 

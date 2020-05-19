@@ -19,9 +19,15 @@ export function getProjectFiles(projectPattern: string | undefined): string[] {
         return [""];
     }
     var cwd = tl.getVariable("System.DefaultWorkingDirectory");
+    // if no CWD set, use process dir
+    if (!cwd) {
+        console.log("no System.DefaultWorkingDirectory, using process.cwd()");
+        cwd = process.cwd();
+    } 
+   
     console.log("cwd: " + cwd);
 
-    var projectFiles: string[] = tl.findMatch(cwd || process.cwd(), projectPattern);
+    var projectFiles: string[] = tl.findMatch(cwd, projectPattern);
 
     if (!projectFiles || !projectFiles.length) {
         console.log("No results returned");

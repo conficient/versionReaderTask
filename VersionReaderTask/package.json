@@ -18,6 +18,7 @@
     "@types/node": "^13.1.7",
     "@types/q": "^1.5.2",
     "@types/xmldom": "^0.1.29",
+    "mocha": "^7.1.2",
     "sync-request": "^6.1.0"
   }
 }

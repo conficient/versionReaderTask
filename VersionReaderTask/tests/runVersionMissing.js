@@ -7,12 +7,12 @@ let tmr = new tmrm.TaskMockRunner(taskPath);
 // set findMatch answer:
 tmr.setAnswers({
     "findMatch": {
-        "VersionPrefix.csproj": ["./tests/VersionPrefix.csproj"]
+        "VersionMissing.csproj": ["./tests/VersionMissing.csproj"]
     }
 });
 // dummy build value
 process.env.BUILD_BUILDID = "5678";
-// set searchPattern 
-tmr.setInput("searchPattern", "VersionPrefix.csproj");
+// set searchPattern + build prefix
+tmr.setInput("searchPattern", "VersionMissing.csproj");
 tmr.setInput("buildPrefix", ".");
 tmr.run();
