@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <VersionPrefix>1.2.5</VersionPrefix>
+    <Description>File with a version tag</Description>
+  </PropertyGroup>
+</Project>

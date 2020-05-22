@@ -2,14 +2,14 @@
   "manifestVersion": 1,
   "id": "VersionReaderTask",
   "name": "Version Reader",
-  "version": "1.15",
+  "version": "2.2",
   "publisher": "conficient",
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "description": "A build task that reads the <Version> tag from the .csproj or .vbproj file and makes it available as build variables.",
+  "description": "A build task that reads the <Version> tag from the .csproj or .vbproj file and makes it available as build variables. V2 is now cross-plaform (win and linux)",
   "categories": [
     "Build and release"
   ],
@@ -25,7 +25,7 @@
     {
       "path": "VersionReaderTask"
     }
-  ],
+  ], 
   "content": {
     "details": {
       "path": "readme.md"
