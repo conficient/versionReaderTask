@@ -1,6 +1,6 @@
 /*
- *  VersionReader V2 devops build task
- *  ----------------------------------
+ *  VersionReader V2.1 devops build task
+ *  ------------------------------------
 **/
 import path = require('path');
 import tl = require('azure-pipelines-task-lib/task');
@@ -29,7 +29,7 @@ export class versionReader {
     public async execute() {
         try {
             // report input variables
-            console.log("VersionReader task V2.0");
+            console.log("VersionReader task V2.2");
             console.log("=======================");
             console.log(`Search Pattern  : ${this.searchPattern}`)
             console.log(`Variables Prefix: ${this.variablesPrefix}`)
