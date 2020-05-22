@@ -56,16 +56,16 @@ Note that the prefix mode is used in this example. If your build only runs versi
 
 ## Version History
 
-### Version 2.0
+### Version 2.2
 
 Task rewritten in TypeScript so that it is cross-platform (will work on both Win, Linux and Mac agents). Features and inputs are the same so it should be possible to just change the version for it to work in the same way as 1.x
-
-The 2.0 release may be somewhat flaky as this is the first time I've done a Node-based task. I will update to 2.1 if there are any fixes needed.
 
 I have added support for other tags in this release, e.g. `<PackageVersion>` and `<FileVersion>`.
 
 _Possible Breaking Changes:_
  - version 1.x  would read all matching projects if the filter matched more than one, which just overwrites the variable values. I have amended 2.0 to only read the first matching file, and warn if more than one .csproj file was matched.
+
+Versions 2.0 and 2.1 were broken due to various issues. Please only use 2.2
 
 ### Version 1.15
 
