@@ -56,6 +56,10 @@ Note that the prefix mode is used in this example. If your build only runs versi
 
 ## Version History
 
+### Version 2.3
+
+Updated `xmldom` package to 0.5.0 for security issue.
+
 ### Version 2.2
 
 Task rewritten in TypeScript so that it is cross-platform (will work on both Win, Linux and Mac agents). Features and inputs are the same so it should be possible to just change the version for it to work in the same way as 1.x
