@@ -33,7 +33,7 @@ class versionReader {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 // report input variables
-                console.log("VersionReader task V2.3");
+                console.log("VersionReader task V2.4");
                 console.log("=======================");
                 console.log(`Search Pattern  : ${this.searchPattern}`);
                 console.log(`Variables Prefix: ${this.variablesPrefix}`);
