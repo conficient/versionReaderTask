@@ -56,6 +56,10 @@ Note that the prefix mode is used in this example. If your build only runs versi
 
 ## Version History
 
+### Version 2.4
+
+Reverted changes in 2.3, not working
+
 ### Version 2.3
 
 Updated `xmldom` package to 0.5.0 for security issue.
