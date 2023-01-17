@@ -9,7 +9,7 @@
   "author": "conficient",
   "license": "ISC",
   "dependencies": {
-    "azure-pipelines-task-lib": "^2.9.3",
+    "azure-pipelines-task-lib": "^4.2.0",
     "xmldom": "^0.6.0",
     "xpath": "0.0.27"
   },
