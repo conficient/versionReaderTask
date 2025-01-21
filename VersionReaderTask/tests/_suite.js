@@ -53,7 +53,7 @@ utilsTests.run();
         tr.runAsync().then(() => {
             console.log("Task result = " + tr.succeeded);
             assert.equal(tr.succeeded, false, 'should have failed');
-            assert.equal(tr.errorIssues.length, 1, "should have 1 error");
+            assert.equal(tr.errorIssues.length, 2, "should have 2 errors");
             assert.equal(tr.errorIssues[0], 'Unhandled: Input required: searchPattern', 'Should fail if no searchPattern provided');
             console.log(tr.stdout);
             done();
@@ -130,6 +130,12 @@ utilsTests.run();
 });
 // check an environment var was set
 function assertSet(tr, envVar, value) {
-    var expected = `##vso[task.setvariable variable=${envVar};issecret=false;]${value}`;
-    assert.equal(true, tr.stdOutContained(expected));
+    // var prefix  = `##vso[task.setvariable variable=${envVar};isOutput=false;issecret=false;]`;
+    // var lines = tr.stdout.split(/\r?\n|\r|\r/g);
+    // lines.forEach((line)=>{
+    //     if(line.startsWith(prefix))
+    //         console.log("MATCH: " + line);
+    // });
+    var expected = `##vso[task.setvariable variable=${envVar};isOutput=false;issecret=false;]${value}`;
+    assert.equal(true, tr.stdOutContained(expected), `Expected var ${envVar} ='${value}'`);
 }

@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as assert from 'assert';
 import * as ttm from 'azure-pipelines-task-lib/mock-test';
-import { describe, it} from 'mocha'; 
+import { describe, it } from 'mocha';
 import * as utilsTests from './utilsTest';
 
 utilsTests.run();
@@ -24,7 +24,7 @@ describe('VersionReaderTask v3 tests', () => {
         tr.runAsync().then(() => {
             console.log("Task result = " + tr.succeeded);
             assert.equal(tr.succeeded, false, 'should have failed');
-            assert.equal(tr.errorIssues.length, 1, "should have 1 error");
+            assert.equal(tr.errorIssues.length, 2, "should have 2 errors");
             assert.equal(tr.errorIssues[0], 'Unhandled: Input required: searchPattern', 'Should fail if no searchPattern provided');
             console.log(tr.stdout);
             done();
@@ -123,6 +123,7 @@ describe('VersionReaderTask v3 tests', () => {
 
 // check an environment var was set
 function assertSet(tr: ttm.MockTestRunner, envVar: string, value: string) {
-    var expected = `##vso[task.setvariable variable=${envVar};issecret=false;]${value}`;
-    assert.equal(true, tr.stdOutContained(expected));
+    // testrunner output has changed
+    var expected = `##vso[task.setvariable variable=${envVar};isOutput=false;issecret=false;]${value}`;
+    assert.equal(true, tr.stdOutContained(expected), `Expected var ${envVar} ='${value}'`);
 }

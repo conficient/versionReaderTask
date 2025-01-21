@@ -50,7 +50,7 @@ function run() {
             });
             (0, mocha_1.it)("Should read correct version values", (done) => {
                 // file does exist
-                const filename = "./test/Version.csproj";
+                const filename = "./tests/Version.csproj";
                 var values = utils.readProjectFile(filename);
                 assert.equal("1.2.3", values.version);
                 assert.equal("1.2.4", values.assemblyversion);
