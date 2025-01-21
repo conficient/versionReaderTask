@@ -2,16 +2,16 @@
   "manifestVersion": 1,
   "id": "VersionReaderTask",
   "name": "Version Reader",
-  "version": "2.4",
+  "version": "3.0.0",
   "publisher": "conficient",
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "description": "A build task that reads the <Version> tag from the .csproj or .vbproj file and makes it available as build variables. V2 is now cross-plaform (win and linux)",
+  "description": "A build task that reads the <Version> tag from the .csproj or .vbproj file and makes it available as build variables. V3 supports NODE 20",
   "categories": [
-    "Build and release"
+    "Azure Pipelines"
   ],
   "tags": [
     "Project",

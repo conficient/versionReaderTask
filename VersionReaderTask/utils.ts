@@ -1,7 +1,7 @@
-import tl = require('azure-pipelines-task-lib/task');
+import * as tl from 'azure-pipelines-task-lib/task';
 import xdom from 'xmldom';
-import xpath from 'xpath';
-import fs = require('fs');
+import * as xpath from 'xpath';
+import * as fs from 'node:fs';
 
 // used version - if no values are present
 const DEFAULT_VERSION = "1.0.0";
@@ -49,7 +49,7 @@ export function getProjectFiles(projectPattern: string | undefined): string[] {
  */
 export function readProjectFile(file: string): versionValues {
     // read the file
-    console.log("reading file");
+    console.log("reading file " + file);
     var data = fs.readFileSync(file, "utf8");
 
     console.log("read.. len = " + data.length);

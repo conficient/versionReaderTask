@@ -7,4 +7,5 @@
 *.vsix
 **/node_modules/
 **/obj/**/*.*
+**/bin/**/*.*
 **/tests/*.log

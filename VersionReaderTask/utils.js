@@ -1,12 +1,51 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const tl = require("azure-pipelines-task-lib/task");
+exports.getProjectFiles = getProjectFiles;
+exports.readProjectFile = readProjectFile;
+exports.getFirstMatch = getFirstMatch;
+exports.setBuildVariable = setBuildVariable;
+exports.setEnvVars = setEnvVars;
+exports.setEnvVar = setEnvVar;
+const tl = __importStar(require("azure-pipelines-task-lib/task"));
 const xmldom_1 = __importDefault(require("xmldom"));
-const xpath_1 = __importDefault(require("xpath"));
-const fs = require("fs");
+const xpath = __importStar(require("xpath"));
+const fs = __importStar(require("node:fs"));
 // used version - if no values are present
 const DEFAULT_VERSION = "1.0.0";
 /**
@@ -37,7 +76,6 @@ function getProjectFiles(projectPattern) {
     console.log(projectFiles);
     return projectFiles;
 }
-exports.getProjectFiles = getProjectFiles;
 /**
  * read .??proj file as XML and parse values from _Version_ tags
  *
@@ -47,7 +85,7 @@ exports.getProjectFiles = getProjectFiles;
  */
 function readProjectFile(file) {
     // read the file
-    console.log("reading file");
+    console.log("reading file " + file);
     var data = fs.readFileSync(file, "utf8");
     console.log("read.. len = " + data.length);
     // generate dom
@@ -65,7 +103,6 @@ function readProjectFile(file) {
     };
     return result;
 }
-exports.readProjectFile = readProjectFile;
 /**
  * read element name using xpath
  *
@@ -76,7 +113,7 @@ exports.readProjectFile = readProjectFile;
 function getElement(name, doc) {
     // use XPath to get string
     var path = "string(/Project/PropertyGroup/" + name + ")";
-    var e = xpath_1.default.select(path, doc);
+    var e = xpath.select(path, doc);
     return e; // xpath does return a string here
 }
 /**
@@ -100,7 +137,6 @@ function getFirstMatch(values) {
     console.log(`No version tags found, using ${DEFAULT_VERSION} as the default`);
     return DEFAULT_VERSION;
 }
-exports.getFirstMatch = getFirstMatch;
 /**
  * set the VERSION_BUILD value (with prefix if set)
  *
@@ -129,7 +165,6 @@ function setBuildVariable(value, varPrefix, buildPrefix) {
     console.log(`Setting build variable ${varName} to '${verValue}'`);
     tl.setVariable(varName, verValue);
 }
-exports.setBuildVariable = setBuildVariable;
 /**
  * set individual vars (does not append build num)
  *
@@ -149,7 +184,6 @@ function setEnvVars(values, prefix) {
     setEnvVar("PackageVersion", values.packageversion, prefix);
     setEnvVar("FileVersion", values.fileversion, prefix);
 }
-exports.setEnvVars = setEnvVars;
 /**
  * set individual vars, e.g. VERSION, VERSIONPREFIX etc. (with prefix if set)
  *
@@ -174,4 +208,3 @@ function setEnvVar(name, value, prefix) {
     console.log(`Variable ${varName} set to '${value}'`);
     tl.setVariable(varName, value);
 }
-exports.setEnvVar = setEnvVar;
