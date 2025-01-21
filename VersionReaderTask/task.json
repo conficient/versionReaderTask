@@ -2,13 +2,13 @@
   "id": "EBF8CB1C-EB3B-4F4D-86FD-D55549BC6D81",
   "name": "VersionReaderTask",
   "friendlyName": "Version Reader",
-  "description": "Reads the <Version> tag value project file and makes it available as build variables. V2 now rewritten in TypeScript and is cross-platform",
+  "description": "Reads the <Version> tag value project file and makes it available as build variables. V3 updated for Node 20",
   "helpMarkDown": "",
   "category": "Utility",
   "author": "Conficient",
   "version": {
-    "Major": 2,
-    "Minor": 4,
+    "Major": 3,
+    "Minor": 0,
     "Patch": 0
   },
   "instanceNameFormat": "Generate variables $(searchPattern) ",
@@ -40,7 +40,16 @@
   ],
   "execution": {
     "Node10": {
-      "target": "index.js"
+      "target": "index.js",
+      "argumentFormat": ""
+    },
+    "Node16": {
+      "target": "index.js",
+      "argumentFormat": ""
+    },
+    "Node20_1": {
+      "target": "index.js",
+      "argumentFormat": ""
     }
   }
 }

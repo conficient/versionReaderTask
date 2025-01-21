@@ -1,5 +1,5 @@
 /*
- *  VersionReader V2.1 devops build task
+ *  VersionReader V3.0 devops build task
  *  ------------------------------------
 **/
 import path = require('path');
@@ -29,7 +29,7 @@ export class versionReader {
     public async execute() {
         try {
             // report input variables
-            console.log("VersionReader task V2.4");
+            console.log("VersionReader task V3.0");
             console.log("=======================");
             console.log(`Search Pattern  : ${this.searchPattern}`)
             console.log(`Variables Prefix: ${this.variablesPrefix}`)
@@ -62,8 +62,8 @@ export class versionReader {
             // report success
             tl.setResult(tl.TaskResult.Succeeded, "Variables set");
         }
-        catch (err) {
-            tl.error(err);
+        catch (err:any) {
+            tl.error(<string>err);
             tl.setResult(tl.TaskResult.Failed, err);
         }
     }

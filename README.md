@@ -56,6 +56,10 @@ Note that the prefix mode is used in this example. If your build only runs versi
 
 ## Version History
 
+### Version 3.0
+
+Upgraded to Node20 to remove warning. https://aka.ms/node-runner-guidance. Using version 3.0 so it is still possible to use 2.4 if required.
+
 ### Version 2.4
 
 Reverted changes in 2.3, not working

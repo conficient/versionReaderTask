@@ -3,6 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getProjectFiles = getProjectFiles;
+exports.readProjectFile = readProjectFile;
+exports.getFirstMatch = getFirstMatch;
+exports.setBuildVariable = setBuildVariable;
+exports.setEnvVars = setEnvVars;
+exports.setEnvVar = setEnvVar;
 const tl = require("azure-pipelines-task-lib/task");
 const xmldom_1 = __importDefault(require("xmldom"));
 const xpath_1 = __importDefault(require("xpath"));
@@ -37,7 +43,6 @@ function getProjectFiles(projectPattern) {
     console.log(projectFiles);
     return projectFiles;
 }
-exports.getProjectFiles = getProjectFiles;
 /**
  * read .??proj file as XML and parse values from _Version_ tags
  *
@@ -65,7 +70,6 @@ function readProjectFile(file) {
     };
     return result;
 }
-exports.readProjectFile = readProjectFile;
 /**
  * read element name using xpath
  *
@@ -100,7 +104,6 @@ function getFirstMatch(values) {
     console.log(`No version tags found, using ${DEFAULT_VERSION} as the default`);
     return DEFAULT_VERSION;
 }
-exports.getFirstMatch = getFirstMatch;
 /**
  * set the VERSION_BUILD value (with prefix if set)
  *
@@ -129,7 +132,6 @@ function setBuildVariable(value, varPrefix, buildPrefix) {
     console.log(`Setting build variable ${varName} to '${verValue}'`);
     tl.setVariable(varName, verValue);
 }
-exports.setBuildVariable = setBuildVariable;
 /**
  * set individual vars (does not append build num)
  *
@@ -149,7 +151,6 @@ function setEnvVars(values, prefix) {
     setEnvVar("PackageVersion", values.packageversion, prefix);
     setEnvVar("FileVersion", values.fileversion, prefix);
 }
-exports.setEnvVars = setEnvVars;
 /**
  * set individual vars, e.g. VERSION, VERSIONPREFIX etc. (with prefix if set)
  *
@@ -174,4 +175,3 @@ function setEnvVar(name, value, prefix) {
     console.log(`Variable ${varName} set to '${value}'`);
     tl.setVariable(varName, value);
 }
-exports.setEnvVar = setEnvVar;
