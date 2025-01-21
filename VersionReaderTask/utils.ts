@@ -49,7 +49,7 @@ export function getProjectFiles(projectPattern: string | undefined): string[] {
  */
 export function readProjectFile(file: string): versionValues {
     // read the file
-    console.log("reading file");
+    console.log("reading file " + file);
     var data = fs.readFileSync(file, "utf8");
 
     console.log("read.. len = " + data.length);

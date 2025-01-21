@@ -47,7 +47,7 @@ exports.versionReader = void 0;
  *  VersionReader V3.0 devops build task
  *  ------------------------------------
 **/
-const tl = __importStar(require("azure-pipelines-task-lib"));
+const tl = __importStar(require("azure-pipelines-task-lib/task"));
 const utils = __importStar(require("./utils"));
 /**
  * versionReader class to read version tags from 2017+ .??proj files

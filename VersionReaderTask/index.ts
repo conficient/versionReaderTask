@@ -2,7 +2,7 @@
  *  VersionReader V3.0 devops build task
  *  ------------------------------------
 **/
-import * as tl from 'azure-pipelines-task-lib';
+import * as tl from 'azure-pipelines-task-lib/task';
 import * as utils from './utils';
 
 /**

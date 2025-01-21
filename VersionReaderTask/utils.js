@@ -32,6 +32,9 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getProjectFiles = getProjectFiles;
 exports.readProjectFile = readProjectFile;
@@ -40,9 +43,9 @@ exports.setBuildVariable = setBuildVariable;
 exports.setEnvVars = setEnvVars;
 exports.setEnvVar = setEnvVar;
 const tl = __importStar(require("azure-pipelines-task-lib/task"));
-const xdom = __importStar(require("xmldom"));
+const xmldom_1 = __importDefault(require("xmldom"));
 const xpath = __importStar(require("xpath"));
-const fs = __importStar(require("fs"));
+const fs = __importStar(require("node:fs"));
 // used version - if no values are present
 const DEFAULT_VERSION = "1.0.0";
 /**
@@ -82,12 +85,12 @@ function getProjectFiles(projectPattern) {
  */
 function readProjectFile(file) {
     // read the file
-    console.log("reading file");
+    console.log("reading file " + file);
     var data = fs.readFileSync(file, "utf8");
     console.log("read.. len = " + data.length);
     // generate dom
     console.log("creating DOM");
-    var d = new xdom.DOMParser();
+    var d = new xmldom_1.default.DOMParser();
     var doc = d.parseFromString(data);
     // get result
     var result = {

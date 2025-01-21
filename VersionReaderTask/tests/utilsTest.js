@@ -33,20 +33,33 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-//import 'azure-pipelines-task-lib/mock-answer';
-const tmrm = __importStar(require("azure-pipelines-task-lib/mock-run"));
-const path = __importStar(require("node:path"));
-let taskPath = path.join(__dirname, '..', 'index.js');
-let tmr = new tmrm.TaskMockRunner(taskPath);
-// set findMatch answer:
-tmr.setAnswers({
-    "findMatch": {
-        "AssemblyVersion.csproj": ["./tests/AssemblyVersion.csproj"]
-    }
-});
-// dummy build value
-process.env.BUILD_BUILDID = "5678";
-// set searchPattern 
-tmr.setInput("searchPattern", "AssemblyVersion.csproj");
-tmr.setInput("buildPrefix", ".");
-tmr.run();
+exports.run = run;
+const assert = __importStar(require("assert"));
+const mocha_1 = require("mocha");
+const utils = __importStar(require("../utils"));
+function run() {
+    (0, mocha_1.describe)("Utils tests", () => {
+        (0, mocha_1.describe)("readProjectFile", () => {
+            (0, mocha_1.it)("Should fail if file not found", (done) => {
+                // file does not exist
+                const filename = "./BadFile.csproj";
+                assert.throws(() => {
+                    var tmp = utils.readProjectFile(filename);
+                }, "error");
+                done();
+            });
+            (0, mocha_1.it)("Should read correct version values", (done) => {
+                // file does exist
+                const filename = "./test/Version.csproj";
+                var values = utils.readProjectFile(filename);
+                assert.equal("1.2.3", values.version);
+                assert.equal("1.2.4", values.assemblyversion);
+                assert.equal("1.2.5", values.versionprefix);
+                assert.equal("1.2.6", values.packageversion);
+                assert.equal("1.2.7", values.fileversion);
+                assert.equal("alpha", values.versionsuffix);
+                done();
+            });
+        });
+    });
+}

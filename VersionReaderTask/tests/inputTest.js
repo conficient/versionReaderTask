@@ -34,7 +34,8 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = __importStar(require("path"));
-const tmrm = require("azure-pipelines-task-lib/mock-run");
+//import * as ma from 'azure-pipelines-task-lib/mock-answer';
+const tmrm = __importStar(require("azure-pipelines-task-lib/mock-run"));
 let taskPath = path.join(__dirname, '..', 'index.js');
 let tmr = new tmrm.TaskMockRunner(taskPath);
 // no searchPattern set

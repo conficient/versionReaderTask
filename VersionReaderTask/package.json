@@ -4,7 +4,7 @@
   "description": "VersionReader V3 for VSTS Azure DevOps",
   "main": "index.js",
   "scripts": {
-    "test": "node tests/_suite.js"
+    "test": "npx mocha ./tests/_suite.js"
   },
   "author": "conficient",
   "license": "ISC",
@@ -14,12 +14,12 @@
     "xpath": "0.0.34"
   },
   "devDependencies": {
-    "typescript": "5.7.2",
     "@types/mocha": "10.0.10",
     "@types/node": "22.10.7",
     "@types/q": "1.5.8",
     "@types/xmldom": "0.1.34",
-    "mocha": "11.1.0",
-    "sync-request": "6.1.0"
+    "mocha": "^11.1.0",
+    "sync-request": "6.1.0",
+    "typescript": "5.7.2"
   }
 }

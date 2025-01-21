@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
   "id": "EBF8CB1C-EB3B-4F4D-86FD-D55549BC6D81",
   "name": "VersionReaderTask",
   "friendlyName": "Version Reader",
