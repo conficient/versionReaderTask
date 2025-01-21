@@ -2,8 +2,7 @@
  *  VersionReader V3.0 devops build task
  *  ------------------------------------
 **/
-import path = require('path');
-import tl = require('azure-pipelines-task-lib/task');
+import * as tl from 'azure-pipelines-task-lib';
 import * as utils from './utils';
 
 /**

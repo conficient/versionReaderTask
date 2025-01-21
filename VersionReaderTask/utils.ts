@@ -1,7 +1,7 @@
-import tl = require('azure-pipelines-task-lib/task');
+import * as tl from 'azure-pipelines-task-lib/task';
 import xdom from 'xmldom';
-import xpath from 'xpath';
-import fs = require('fs');
+import * as xpath from 'xpath';
+import * as fs from 'node:fs';
 
 // used version - if no values are present
 const DEFAULT_VERSION = "1.0.0";

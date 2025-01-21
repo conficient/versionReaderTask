@@ -43,7 +43,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.versionReader = void 0;
-const tl = require("azure-pipelines-task-lib/task");
+/*
+ *  VersionReader V3.0 devops build task
+ *  ------------------------------------
+**/
+const tl = __importStar(require("azure-pipelines-task-lib"));
 const utils = __importStar(require("./utils"));
 /**
  * versionReader class to read version tags from 2017+ .??proj files
