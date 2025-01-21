@@ -130,12 +130,7 @@ utilsTests.run();
 });
 // check an environment var was set
 function assertSet(tr, envVar, value) {
-    // var prefix  = `##vso[task.setvariable variable=${envVar};isOutput=false;issecret=false;]`;
-    // var lines = tr.stdout.split(/\r?\n|\r|\r/g);
-    // lines.forEach((line)=>{
-    //     if(line.startsWith(prefix))
-    //         console.log("MATCH: " + line);
-    // });
+    // testrunner output has changed
     var expected = `##vso[task.setvariable variable=${envVar};isOutput=false;issecret=false;]${value}`;
     assert.equal(true, tr.stdOutContained(expected), `Expected var ${envVar} ='${value}'`);
 }
