@@ -14,6 +14,8 @@ An Azure DevOps pipeline extension (VSIX) that reads version tags (`<Version>`, 
   - `tests/` — Mocha test suite; uses `azure-pipelines-task-lib/mock-run` and `mock-test`
 - `package.cmd` — Packages the VSIX using `tfx extension create`
 
+Note: the `.csproj` files are test files and should not be confused with actual project files for the task.
+
 ## Build, test, and lint
 
 All commands run inside `VersionReaderTask/`:
