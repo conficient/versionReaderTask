@@ -160,7 +160,7 @@ function setBuildVariable(value, varPrefix, buildPrefix) {
         varName = `${varPrefix}_${VERSION}_BUILD`;
     else
         varName = `${VERSION}_BUILD`;
-    var verValue = `${value}${buildPrefix}${buildId}`;
+    var verValue = `${value}${buildPrefix !== null && buildPrefix !== void 0 ? buildPrefix : ""}${buildId}`;
     // set ENV var
     console.log(`Setting build variable ${varName} to '${verValue}'`);
     tl.setVariable(varName, verValue);

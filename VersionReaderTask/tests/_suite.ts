@@ -100,7 +100,7 @@ describe('VersionReaderTask v3 tests', () => {
 
 
     it('Version reverts to 1.0.0 if not found (runVersionMissing.ts)', function (done: Mocha.Done) {
-        // reads the Version.csproj file with TEST prefix
+        // reads the VersionMissing.csproj file with no prefix
         let tp = path.join(__dirname, 'runVersionMissing.js');
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
 
@@ -115,6 +115,65 @@ describe('VersionReaderTask v3 tests', () => {
 
             // version prefix will be set with 1.0.0
             assertSet(tr, "VersionPrefix", "1.0.0");
+            done();
+        });
+    });
+
+
+    it('VersionPrefix is used when Version is absent (runVersionPrefix.ts)', function (done: Mocha.Done) {
+        // reads VersionPrefix.csproj which has only <VersionPrefix> set
+        let tp = path.join(__dirname, 'runVersionPrefix.js');
+        let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
+
+        process.env.BUILD_BUILDID = "5678";
+
+        tr.runAsync().then(() => {
+            console.log("Task result = " + tr.succeeded);
+            assert.equal(tr.succeeded, true, 'should have succeeded');
+            assert.equal(tr.errorIssues.length, 0, "should have 0 errors");
+            console.log(tr.stdout);
+
+            assertSet(tr, "VERSION_BUILD", "1.2.5.5678");
+            assertSet(tr, "VersionPrefix", "1.2.5");
+            done();
+        });
+    });
+
+
+    it('AssemblyVersion is used when Version is absent (runAssemblyVersion.ts)', function (done: Mocha.Done) {
+        // reads AssemblyVersion.csproj which has only <AssemblyVersion> set
+        let tp = path.join(__dirname, 'runAssemblyVersion.js');
+        let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
+
+        process.env.BUILD_BUILDID = "5678";
+
+        tr.runAsync().then(() => {
+            console.log("Task result = " + tr.succeeded);
+            assert.equal(tr.succeeded, true, 'should have succeeded');
+            assert.equal(tr.errorIssues.length, 0, "should have 0 errors");
+            console.log(tr.stdout);
+
+            assertSet(tr, "VERSION_BUILD", "2.0.0.5678");
+            assertSet(tr, "AssemblyVersion", "2.0.0");
+            done();
+        });
+    });
+
+
+    it('Empty buildPrefix concatenates version and build ID directly (runVersionNoBuildPrefix.ts)', function (done: Mocha.Done) {
+        // empty buildPrefix means no separator between version and build ID
+        let tp = path.join(__dirname, 'runVersionNoBuildPrefix.js');
+        let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
+
+        process.env.BUILD_BUILDID = "5678";
+
+        tr.runAsync().then(() => {
+            console.log("Task result = " + tr.succeeded);
+            assert.equal(tr.succeeded, true, 'should have succeeded');
+            assert.equal(tr.errorIssues.length, 0, "should have 0 errors");
+            console.log(tr.stdout);
+
+            assertSet(tr, "VERSION_BUILD", "1.2.35678");
             done();
         });
     });
