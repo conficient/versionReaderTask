@@ -1,5 +1,5 @@
 import * as tl from 'azure-pipelines-task-lib/task';
-import xdom from 'xmldom';
+import { DOMParser } from '@xmldom/xmldom';
 import * as xpath from 'xpath';
 import * as fs from 'node:fs';
 
@@ -56,7 +56,7 @@ export function readProjectFile(file: string): versionValues {
 
     // generate dom
     console.log("creating DOM");
-    var d = new xdom.DOMParser();
+    var d = new DOMParser();
     var doc = d.parseFromString(data);
 
     // get result
