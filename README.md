@@ -58,6 +58,10 @@ Note that the `prefix mode` is used in this example, so the task prefixes the bu
 
 ## Version History
 
+### Version 3.1
+
+Updated using AI tooling to improve code and add more tests. Bumped to 3.1 so it overwrites version 3.0.0
+
 ### Version 3.0
 
 Upgraded to Node20 to remove warning. https://aka.ms/node-runner-guidance. I am using version 3.0 so it is still possible to use 2.x for older builds if required, and should not be a breaking change for existing pipelines.
